@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,15 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//Route::middleware('auth:sanctum')->post('api/v1/user', function (Request $request) {
 //    return $request->user();
 //});
+Route::middleware('auth:api')->post('v1/get-user', function (Request $request) {
+    return $request->user();
+});
 
 
-Route::group(['namespace' => 'Api\V1', 'prefix' => '/v1'], function () {
+
+Route::group(['namespace' => '\App\Http\Controllers\Api\V1', 'prefix' => '/v1'], function () {
 
     Route::group(['prefix' => 'user'], function () {
-        Route::get('/login', 'AuthController@login');
-        Route::get('/check-otp', 'AuthController@checkOtp');
+        Route::get('/login', [AuthController::class, 'login']);
+        Route::get('/check-otp', [AuthController::class, 'checkOtp']);
     });
+
+//    Route::group(['middleware' => ['auth:api']], function () {
+//        Route::group(['prefix' => 'user'], function () {
+//          //  Route::post('/', [UserController::class,'user']);//get data of user
+//        });
+//    });
 });

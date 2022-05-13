@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('mobile');
             $table->string('otp');
-            $table->timestamp('expire_otp_at');
+            $table->timestamp('otp_expire_at')->nullable();
             $table->timestamps();
         });
     }

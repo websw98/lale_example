@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -107,5 +111,8 @@ return [
     */
 
     'password_timeout' => 10800,
+
+    'otp_expire_at'=>60,
+    'otp_allowed_number_per_hour'=>3
 
 ];
